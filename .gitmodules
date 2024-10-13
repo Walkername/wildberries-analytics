@@ -1,0 +1,3 @@
+[submodule "example-udp-pinger"]
+	path = example-udp-pinger
+	url = https://github.com/Walkername/UdpPinger
