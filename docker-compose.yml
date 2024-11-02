@@ -1,0 +1,43 @@
+#version: '3.8'
+
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Expose MongoDB on localhost
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+
+  wb-processor:
+    image: wb-processor:latest # Build this image below in Step 2
+    container_name: wb-processor
+    depends_on:
+      - mongodb
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products # Connects to MongoDB
+    networks:
+      - app-network
+
+  wb-parser:
+    image: wb-parser:latest # Build this image below in Step 2
+    container_name: wb-parser
+    depends_on:
+      - mongodb
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products # Connects to MongoDB
+    networks:
+      - app-network
+
+volumes:
+  mongo_data: # Named volume for MongoDB data persistence
+    driver: local
+
+networks:
+  app-network: # Custom network for all services
