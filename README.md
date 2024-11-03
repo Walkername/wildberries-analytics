@@ -1,8 +1,6 @@
-# Сборка проекта
+# Сборка проекта. Docker контейнеры
 
-## Сборка контейнеров Docker
-
-### MongoDB
+## MongoDB
 
 Используемый образ `mongodb` из Docker Hub:
 
@@ -10,11 +8,11 @@
 docker image pull mongodb/mongodb-community-server:8.0.1-ubuntu2204
 ```
 
-### Docker-Compose со сборкой образов
+## Docker-Compose со сборкой образов
 
-#### SpringBoot Application Properties
+### SpringBoot Application Properties
 
-##### Сервис Parser
+#### Сервис Parser
 
 */src/main/resources/application.properties*:
 
@@ -27,7 +25,7 @@ processor.service.url=http://wb-processor:8082/process
 
 При изменении `server.port` поменять порт в Dockerfile.
 
-##### Сервис Processor
+#### Сервис Processor
 
 */src/main/resources/application.properties*:
 
@@ -39,7 +37,7 @@ spring.data.mongodb.uri=mongodb://mongodb:27017/wb-products
 
 При изменении `server.port` поменять порт в Dockerfile и `application.properties` у сервиса Parser.
 
-#### Сборка JAR исполнямых файлов
+### Сборка JAR исполнямых файлов
 
 Собираем jar исходники с помощью `./mvnw`.
 
@@ -53,7 +51,7 @@ spring.data.mongodb.uri=mongodb://mongodb:27017/wb-products
 
 Также с остальными сервисами.
 
-#### Сборка docker-compose
+### Сборка docker-compose
 
 В папке с файлом docker-compose.yml:
 
@@ -71,7 +69,7 @@ docker-compose up -d
 
 ***
 
-### Docker-Compose без сборки образов
+## Docker-Compose без сборки образов
 
 Образы на Docker Hub:
 
@@ -88,7 +86,7 @@ docker-compose up -d
 
 ***
 
-### API
+# API
 
 API для парсинга:
 ```
