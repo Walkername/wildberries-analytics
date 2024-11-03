@@ -76,7 +76,7 @@ docker image pull walkername/wb-parser:latest
 docker image pull walkername/wb-processor:latest
 ```
 
-Запуск контейнеров:
+Запуск контейнеров. В папке с файлом docker-compose.yml:
 
 ```
 docker-compose up -d
