@@ -2,36 +2,38 @@
 
 services:
   mongodb:
-    image: mongodb/mongodb-community-server:latest
+    image: mongodb/mongodb-community-server:8.0.1-ubuntu2204
     container_name: mongodb
     ports:
-      - "27017:27017" # Expose MongoDB on localhost
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
     networks:
       - app-network
 
   wb-processor:
-    image: wb-processor:latest # Build this image below in Step 2
+    build: processor/
+    image: walkername/wb-processor:latest
     container_name: wb-processor
     depends_on:
       - mongodb
     ports:
       - "8082:8082"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products # Connects to MongoDB
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products
     networks:
       - app-network
 
   wb-parser:
-    image: wb-parser:latest # Build this image below in Step 2
+    build: parser/
+    image: walkername/wb-parser:latest
     container_name: wb-parser
     depends_on:
       - mongodb
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products # Connects to MongoDB
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wb-products
     networks:
       - app-network
 
