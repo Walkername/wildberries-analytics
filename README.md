@@ -88,9 +88,10 @@ docker-compose up -d
 
 # API
 
-API для парсинга:
+API для парсинга. При отправке с хостовой машины, на которой запущены контейнеры:
+
 ```
-http://wb-parser:8080/parse
+http://localhost:8080/parse
 ```
 
 Отправка JSON'a в виде:
