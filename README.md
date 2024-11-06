@@ -1,5 +1,7 @@
 # Сборка проекта. Docker контейнеры
 
+***
+
 ## MongoDB
 
 Используемый образ `mongodb` из Docker Hub:
@@ -7,6 +9,8 @@
 ```
 docker image pull mongodb/mongodb-community-server:8.0.1-ubuntu2204
 ```
+
+***
 
 ## Docker-Compose со сборкой образов
 
@@ -18,7 +22,7 @@ docker image pull mongodb/mongodb-community-server:8.0.1-ubuntu2204
 
 ```
 spring.application.name=parser
-server.port=8082
+server.port=8080
 spring.data.mongodb.uri=mongodb://mongodb:27017/wb-products
 processor.service.url=http://wb-processor:8082/process
 ```
@@ -88,9 +92,10 @@ docker-compose up -d
 
 # API
 
-API для парсинга:
+API для парсинга. При отправке с хостовой машины, на которой запущены контейнеры:
+
 ```
-http://wb-parser:8080/parse
+http://localhost:8080/parse
 ```
 
 Отправка JSON'a в виде:
