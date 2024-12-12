@@ -4,3 +4,6 @@
 [submodule "processor"]
 	path = processor
 	url = https://github.com/Walkername/wildberries-processor.git
+[submodule "gui-client"]
+	path = gui-client
+	url = git@github.com:Walkername/wb-analytics-gui-client.git
